@@ -1,19 +1,21 @@
 package com.company.movieapp.service.impl;
 
 import com.company.movieapp.dto.MovieDTO;
-import com.company.movieapp.dto.PersonDTO;
-import com.company.movieapp.entity.Actor;
-import com.company.movieapp.entity.Director;
 import com.company.movieapp.entity.Movie;
+import com.company.movieapp.exception.CustomException;
+import com.company.movieapp.mapstruct.MovieMapStruct;
 import com.company.movieapp.model.request.MovieRequest;
 import com.company.movieapp.repository.MovieRepository;
 import com.company.movieapp.service.ActorService;
 import com.company.movieapp.service.DirectorService;
 import com.company.movieapp.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,18 +25,11 @@ public class MovieServiceImpl implements MovieService {
     private final ActorService actorService;
     private final DirectorService directorService;
 
+    private final MovieMapStruct mapStruct;
+
     @Override
     public List<MovieDTO> getMovies() {
-        return movieRepository.findAll().stream().map(e -> {
-            MovieDTO dto = new MovieDTO();
-            dto.setId(e.getId());
-            dto.setName(e.getName());
-            dto.setYear(e.getYear());
-            dto.setImdb(e.getImdb());
-            dto.setDirector(map(e.getDirector()));
-            dto.setActors(map(e.getActors()));
-            return dto;
-        }).collect(Collectors.toList());
+        return mapStruct.mapToMovieDTOList(movieRepository.findAll());
     }
 
     @Override
@@ -49,47 +44,16 @@ public class MovieServiceImpl implements MovieService {
                 .stream()
                 .map(actorService::getActorById)
                 .collect(Collectors.toList()));
-        return map(movieRepository.save(movie));
+        return mapStruct.map((movieRepository.save(movie)));
     }
 
     @Override
     public MovieDTO getById(UUID id) {
         Optional<Movie> opt = movieRepository.findById(id);
-        return opt.map(this::map).orElse(null);
+        return opt.map(this::map).orElseThrow(() -> new CustomException("Movie not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     private MovieDTO map(Movie movie) {
-        MovieDTO dto = new MovieDTO();
-        dto.setId(movie.getId());
-        dto.setName(movie.getName());
-        dto.setYear(movie.getYear());
-        dto.setImdb(movie.getImdb());
-        dto.setDirector(map(movie.getDirector()));
-        dto.setActors(map(movie.getActors()));
-        return dto;
-    }
-
-    private PersonDTO map(Director director) {
-        PersonDTO dto = new PersonDTO();
-        dto.setId(director.getId());
-        dto.setFirstName(director.getFirstName());
-        dto.setLastName(director.getLastName());
-        dto.setBirthDate(director.getBirthDate());
-        dto.setCountry(director.getCountry());
-        return dto;
-    }
-
-    private List<PersonDTO> map(List<Actor> list) {
-        List<PersonDTO> result = new ArrayList<>();
-        for (Actor actor : list) {
-            PersonDTO dto = new PersonDTO();
-            dto.setId(actor.getId());
-            dto.setFirstName(actor.getFirstName());
-            dto.setLastName(actor.getLastName());
-            dto.setBirthDate(actor.getBirthDate());
-            dto.setCountry(actor.getCountry());
-            result.add(dto);
-        }
-        return result;
+        return mapStruct.map(movie);
     }
 }
