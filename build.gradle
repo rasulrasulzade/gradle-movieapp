@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 	id 'java'
+	id("org.springdoc.openapi-gradle-plugin") version "1.4.0"
 }
 
 group = 'com.company'
@@ -27,6 +28,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.11'
 }
 
 tasks.named('test') {
