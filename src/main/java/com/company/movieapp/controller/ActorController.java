@@ -1,6 +1,6 @@
 package com.company.movieapp.controller;
 
-import com.company.movieapp.entity.Actor;
+import com.company.movieapp.dto.ActorDto;
 import com.company.movieapp.model.request.PersonRequest;
 import com.company.movieapp.service.ActorService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,19 +22,19 @@ public class ActorController {
 
     @GetMapping
     @Operation(summary = "Get actor list")
-    public ResponseEntity<List<Actor>> getActors(){
+    public ResponseEntity<List<ActorDto>> getActors(){
         return new ResponseEntity<>(actorService.getActors(), HttpStatus.OK);
     }
 
     @PostMapping
     @Operation(summary = "Add new actor")
-    public ResponseEntity<Actor> createActor(@RequestBody PersonRequest request){
+    public ResponseEntity<ActorDto> createActor(@RequestBody PersonRequest request){
         return new ResponseEntity<>(actorService.save(request), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get actor by id")
-    public ResponseEntity<Actor> createActor(@PathVariable UUID id){
+    public ResponseEntity<ActorDto> createActor(@PathVariable UUID id){
         return new ResponseEntity<>(actorService.getActorById(id), HttpStatus.OK);
     }
 }

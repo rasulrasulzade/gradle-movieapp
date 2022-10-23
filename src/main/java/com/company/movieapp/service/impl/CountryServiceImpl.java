@@ -6,6 +6,7 @@ import com.company.movieapp.service.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,5 +17,10 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country findById(UUID id) {
         return countryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Country> getCountries() {
+        return countryRepository.findAll();
     }
 }

@@ -9,5 +9,6 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: com.company.movieapp.config.CustomPostgreSQLDialect
         default_schema: movie_db
+        show_sql: true

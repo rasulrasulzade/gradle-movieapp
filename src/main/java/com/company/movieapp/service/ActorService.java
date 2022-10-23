@@ -1,6 +1,6 @@
 package com.company.movieapp.service;
 
-import com.company.movieapp.entity.Actor;
+import com.company.movieapp.dto.ActorDto;
 import com.company.movieapp.model.request.PersonRequest;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface ActorService {
 
-    Actor save(PersonRequest request);
+    ActorDto save(PersonRequest request);
 
-    List<Actor> getActors();
+    List<ActorDto> getActors();
 
-    Actor getActorById(UUID id);
+    ActorDto getActorById(UUID id);
 }
