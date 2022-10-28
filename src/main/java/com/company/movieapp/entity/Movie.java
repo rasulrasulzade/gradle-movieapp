@@ -22,7 +22,7 @@ public class Movie {
     @OneToOne
     Director director;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "movie_actor",
             joinColumns = {@JoinColumn(name = "movie_id")},

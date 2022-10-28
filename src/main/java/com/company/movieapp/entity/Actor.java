@@ -23,6 +23,6 @@ public class Actor {
     @OneToOne
     private Country country;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Movie> movies;
 }

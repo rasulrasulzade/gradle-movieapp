@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, UUID> {
-    @Query(value = "SELECT m.id,\n" +
+    @Query(value = "SELECT DISTINCT m.id,\n" +
             "       m.name,\n" +
             "       m.imdb,\n" +
             "       m.year,\n" +

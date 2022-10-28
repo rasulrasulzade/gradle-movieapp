@@ -44,6 +44,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public ActorDto getActorById(UUID id) {
         Optional<Actor> opt = actorRepository.findById(id);
-        return opt.map(actorMapStruct::map).orElseThrow(() -> new CustomException("Movie not found with id: " + id, HttpStatus.NOT_FOUND));
+        return opt.map(actorMapStruct::map).orElseThrow(() -> new CustomException("Actor not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 }
