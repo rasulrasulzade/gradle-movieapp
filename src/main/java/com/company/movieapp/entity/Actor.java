@@ -1,6 +1,9 @@
 package com.company.movieapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +13,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "actor")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Actor {
     @Id
     private UUID id;

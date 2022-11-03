@@ -24,11 +24,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.11'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'io.zonky.test', name: 'embedded-database-spring-test', version: '2.1.2'
+	testImplementation group: 'io.zonky.test', name: 'embedded-postgres', version: '2.0.1'
+	testImplementation group: 'org.liquibase', name: 'liquibase-core', version: '4.17.2'
 }
 
 tasks.named('test') {

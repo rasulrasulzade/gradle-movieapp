@@ -1,6 +1,9 @@
 package com.company.movieapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +15,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "director")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Director {
     @Id
     private UUID id;

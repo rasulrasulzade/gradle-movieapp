@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="2022-11-03--sql-01" author="Rasul">
+        <sql>
+            CREATE SCHEMA movie_db
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022-11-03--sql-02" author="Rasul">
+        <createTable schemaName="movie_db" tableName="country">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="nationality" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2022-11-01--sql-03" author="Rasul">
+        <sql>
+            INSERT INTO movie_db.country(id, name, nationality)
+            VALUES ('839c9692-5595-4e9c-adc7-1f886eeade78', 'ENGLAND', 'ENGLISH'),
+                   ('c3eea7f9-233b-4dda-8d22-86631e12be80', 'SPANIEN', 'SPANISH')
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
+
+
+

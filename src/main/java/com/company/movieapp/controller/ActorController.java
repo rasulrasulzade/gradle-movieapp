@@ -2,6 +2,7 @@ package com.company.movieapp.controller;
 
 import com.company.movieapp.dto.ActorDto;
 import com.company.movieapp.model.request.PersonRequest;
+import com.company.movieapp.model.response.ActorsResponse;
 import com.company.movieapp.service.ActorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,8 +22,8 @@ public class ActorController {
 
     @GetMapping
     @Operation(summary = "Get actor list")
-    public ResponseEntity<List<ActorDto>> getActors(){
-        return new ResponseEntity<>(actorService.getActors(), HttpStatus.OK);
+    public ResponseEntity<ActorsResponse> getActors() {
+        return new ResponseEntity<>(new ActorsResponse(actorService.getActors()), HttpStatus.OK);
     }
 
     @PostMapping
